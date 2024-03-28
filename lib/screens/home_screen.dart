@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/controller/home_controller.dart';
-import 'package:kriminal_fashion_ecommerce/screens/add_product_screen.dart';
+
+import '../themes/theme_controller.dart';
+import 'add_product_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -15,15 +17,56 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text('Kriminal Fashion Admin'),
         ),
+        drawer: Drawer(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: Text(
+                  'Dark Mode',
+                ),
+                leading: Icon(
+                  Icons.nightlight,
+
+                  color: context.theme.colorScheme.inversePrimary, // works
+                  // NONE OF THESE WORK
+                  // color: themeController.themeData.colorScheme.inversePrimary, // does not work
+                  // color: themeController
+                  //     .themeData.value.colorScheme.inversePrimary, // does not work either
+                  // color: Get.theme.colorScheme.inversePrimary, // does not work - immutable
+                ),
+                onTap: () {
+                  // change theme mode not theme
+
+                  // Get.changeThemeMode(
+                  //     Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+                  // created a method for it
+                  ThemeController.toggleThemeMode();
+
+                  // NONE OF THESE WORK
+                  // Get.isDarkMode
+                  //     ? Get.changeTheme(lightMode)
+                  //     : Get.changeTheme(darkMode);
+
+                  // Get.changeTheme(
+                  //     Get.isDarkMode ? lightMode : darkMode);
+                  // themeController.toggleTheme(); // does not work
+                },
+              ),
+            ],
+          ),
+        ),
         body: ListView.builder(
-            itemCount: 50,
+            itemCount: homeController.products.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text('Title'),
-                subtitle: Text('Price: 100'),
+                title: Text(homeController.products[index].name ?? ''),
+                subtitle: Text(
+                    (homeController.products[index].price ?? 0).toString()),
                 trailing: IconButton(
                     onPressed: () {
-                      homeController.testMethod();
+                      homeController.deleteProduct(
+                          homeController.products[index].id ?? '');
                     },
                     icon: Icon(Icons.delete)),
               );
