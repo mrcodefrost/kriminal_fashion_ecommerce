@@ -40,6 +40,7 @@ dependencies:
   get: ^4.6.6
   dropdown_button2: ^2.3.9
   google_fonts: ^6.2.1
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   json_serializable : ^6.7.1

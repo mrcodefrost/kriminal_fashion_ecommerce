@@ -72,7 +72,7 @@ class AddProductScreen extends StatelessWidget {
                       ],
                       onSelected: (selectedValue) {
                         homeController.prodCategory =
-                            selectedValue ?? 'General';
+                            selectedValue ?? homeController.prodCategory;
                       },
                       hintText: 'Category',
                     ),
@@ -87,7 +87,8 @@ class AddProductScreen extends StatelessWidget {
                         'Clarks',
                       ],
                       onSelected: (selectedValue) {
-                        homeController.prodBrand = selectedValue ?? 'Unbranded';
+                        homeController.prodBrand =
+                            selectedValue ?? homeController.prodBrand;
                       },
                       hintText: 'Brand',
                     ),
@@ -102,7 +103,8 @@ class AddProductScreen extends StatelessWidget {
                 items: ['true', 'false'],
                 onSelected: (selectedValue) {
                   homeController.prodOffer =
-                      bool.tryParse(selectedValue ?? 'false') ?? false;
+                      bool.tryParse(selectedValue ?? 'false') ??
+                          homeController.prodOffer;
                 },
                 hintText: 'Offer?',
               ),
