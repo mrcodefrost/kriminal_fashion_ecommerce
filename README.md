@@ -13,7 +13,7 @@ Kriminal Business App is the administrative panel for managing products and orde
 - **Single Vendor:** Currently supports only one vendor.
 - **Product Customization:** Customize product details, images, and descriptions during product addition.
 
-###
+### Usage
 - Log in to the admin panel using your Firebase credentials.
 - Add, update, or remove products from the dashboard.
 - Manage orders placed by customers.
