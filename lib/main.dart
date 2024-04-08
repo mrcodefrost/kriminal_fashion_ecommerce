@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final prefs = Get.find<SharedPreferences>();
+    // final prefs = Get.find<SharedPreferences>();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'K R I M I N A L',
