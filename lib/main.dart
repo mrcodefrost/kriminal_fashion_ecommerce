@@ -11,9 +11,10 @@ import 'themes/light_mode.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // always place Firebase.initializeApp first after ensureInitialized
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   Get.put(prefs);
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const MyApp());
 }
