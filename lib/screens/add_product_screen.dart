@@ -58,6 +58,15 @@ class AddProductScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
+              TextField(
+                controller: homeController.prodShortTagController,
+                decoration: const InputDecoration(
+                    label: Text('Short Tag'),
+                    hintText: 'Enter your product short tag ID'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -65,6 +74,19 @@ class AddProductScreen extends StatelessWidget {
                     child: CustomDropDownMenu(
                       items: const [
                         'General',
+                        'Dresses',
+                        'Skirts',
+                        'Tops',
+                        'Knitwear',
+                        'Polo Shirts',
+                        'T-Shirts',
+                        'Shirts',
+                        'Trousers',
+                        'Suits',
+                        'Jeans',
+                        'Cargo',
+                        'Shorts',
+                        'Swimwear',
                         'Boots',
                         'Shoe',
                         'Beach Shoes',
@@ -81,6 +103,17 @@ class AddProductScreen extends StatelessWidget {
                     child: CustomDropDownMenu(
                       items: const [
                         'Unbranded',
+                        'Zara',
+                        'Forever 21',
+                        'Snitch',
+                        'Rare Rabbit',
+                        'Only',
+                        'Vera Moda',
+                        'Van Heusan',
+                        'Peter England',
+                        'Allen Solly',
+                        'Domyos',
+                        'Kipsta',
                         'Puma',
                         'Sketchers',
                         'Adidas',

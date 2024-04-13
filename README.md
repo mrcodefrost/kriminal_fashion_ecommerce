@@ -66,6 +66,11 @@ Activate Flutterfire CLI
    flutter pub global activate flutterfire_cli
  ```
 
+5. Generate Model files by running this command
+
+ ```bash
+  dart run build_runner build --delete-conflicting-outputs
+ ```
 
 ### Configuration
 

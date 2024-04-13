@@ -12,10 +12,12 @@ class HomeController extends GetxController {
   TextEditingController prodDescriptionController = TextEditingController();
   TextEditingController prodImageController = TextEditingController();
   TextEditingController prodPriceController = TextEditingController();
+  TextEditingController prodShortTagController = TextEditingController();
 
   String prodCategory = 'General';
   String prodBrand = 'Unbranded';
   bool prodOffer = false;
+  String prodShortTag = 'No Tag';
 
   List<Product> products = [];
 
@@ -34,16 +36,16 @@ class HomeController extends GetxController {
         name: prodNameController.text,
         category: prodCategory,
         description: prodDescriptionController.text,
-        price: double.tryParse(prodPriceController.text),
+        price: double.tryParse(prodPriceController.text) ?? 0.0,
         // price: productPriceController.text as double,
         brand: prodBrand,
         image: prodImageController.text,
         offer: true,
+        shortTag: prodShortTagController.text,
       );
 
       final productJson = product.toJson();
-
-      doc.set(productJson);
+      doc.set(productJson); // code to add to entry to firebase collection
 
       Get.snackbar('Success', 'Product added successfully',
           colorText: Colors.green);
@@ -93,6 +95,7 @@ class HomeController extends GetxController {
     prodCategory = 'General';
     prodBrand = 'Unbranded';
     prodOffer = false;
+    prodShortTagController.clear();
     // in cases of menus always call
     update();
   }
