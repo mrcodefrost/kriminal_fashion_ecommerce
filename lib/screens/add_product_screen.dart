@@ -133,7 +133,7 @@ class AddProductScreen extends StatelessWidget {
               ),
               const Text('Offer Product?'),
               CustomDropDownMenu(
-                items: ['true', 'false'],
+                items: const ['true', 'false'],
                 onSelected: (selectedValue) {
                   homeController.prodOffer =
                       bool.tryParse(selectedValue ?? 'false') ??
@@ -151,7 +151,7 @@ class AddProductScreen extends StatelessWidget {
                   ),
                   onPressed: () async {
                     homeController.addProduct();
-                    await Future.delayed(Duration(milliseconds: 2000));
+                    await Future.delayed(const Duration(milliseconds: 2000));
                     // Get.back(); dont work
                     Get.until((route) => Get.currentRoute == '/');
                   },

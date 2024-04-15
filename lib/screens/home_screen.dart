@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/controller/home_controller.dart';
+import 'package:kriminal_fashion_ecommerce/screens/add_category_screen.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import '../themes/theme_controller.dart';
@@ -30,42 +31,55 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         drawer: Drawer(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: Text(
-                  'Dark Mode',
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: const Text(
+                    'Dark Mode',
+                  ),
+                  leading: Icon(
+                    Icons.nightlight,
+
+                    color: context.theme.colorScheme.inversePrimary, // works
+                    // NONE OF THESE WORK
+                    // color: themeController.themeData.colorScheme.inversePrimary, // does not work
+                    // color: themeController
+                    //     .themeData.value.colorScheme.inversePrimary, // does not work either
+                    // color: Get.theme.colorScheme.inversePrimary, // does not work - immutable
+                  ),
+                  onTap: () {
+                    // change theme mode not theme
+
+                    // Get.changeThemeMode(
+                    //     Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+                    // created a method for it
+                    ThemeController.toggleThemeMode();
+
+                    // NONE OF THESE WORK
+                    // Get.isDarkMode
+                    //     ? Get.changeTheme(lightMode)
+                    //     : Get.changeTheme(darkMode);
+
+                    // Get.changeTheme(
+                    //     Get.isDarkMode ? lightMode : darkMode);
+                    // themeController.toggleTheme(); // does not work
+                  },
                 ),
-                leading: Icon(
-                  Icons.nightlight,
-
-                  color: context.theme.colorScheme.inversePrimary, // works
-                  // NONE OF THESE WORK
-                  // color: themeController.themeData.colorScheme.inversePrimary, // does not work
-                  // color: themeController
-                  //     .themeData.value.colorScheme.inversePrimary, // does not work either
-                  // color: Get.theme.colorScheme.inversePrimary, // does not work - immutable
+                ListTile(
+                  title: const Text('Add Category'),
+                  leading: Icon(
+                    Icons.category,
+                    color: context.theme.colorScheme.inversePrimary,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(AddCategoryScreen());
+                  },
                 ),
-                onTap: () {
-                  // change theme mode not theme
-
-                  // Get.changeThemeMode(
-                  //     Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
-                  // created a method for it
-                  ThemeController.toggleThemeMode();
-
-                  // NONE OF THESE WORK
-                  // Get.isDarkMode
-                  //     ? Get.changeTheme(lightMode)
-                  //     : Get.changeTheme(darkMode);
-
-                  // Get.changeTheme(
-                  //     Get.isDarkMode ? lightMode : darkMode);
-                  // themeController.toggleTheme(); // does not work
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         body: LiquidPullToRefresh(
@@ -82,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                         homeController.deleteProduct(
                             homeController.products[index].id ?? '');
                       },
-                      icon: Icon(Icons.delete)),
+                      icon: const Icon(Icons.delete)),
                 );
               }),
         ),

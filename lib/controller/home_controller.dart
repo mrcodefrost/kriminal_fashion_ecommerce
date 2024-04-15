@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/model/product.dart';
+import 'package:kriminal_fashion_ecommerce/model/product_category.dart';
 
 class HomeController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   late CollectionReference productCollection;
+  late CollectionReference categoryCollection;
 
   TextEditingController prodNameController = TextEditingController();
   TextEditingController prodDescriptionController = TextEditingController();
@@ -14,19 +16,26 @@ class HomeController extends GetxController {
   TextEditingController prodPriceController = TextEditingController();
   TextEditingController prodShortTagController = TextEditingController();
 
+  // Category Controller
+  TextEditingController categoryNameController = TextEditingController();
+
   String prodCategory = 'General';
   String prodBrand = 'Unbranded';
   bool prodOffer = false;
   String prodShortTag = 'No Tag';
 
   List<Product> products = [];
+  List<ProductCategory> productCategories = [];
 
   @override
   void onInit() async {
     super.onInit();
     productCollection = firebaseFirestore.collection('products');
+    categoryCollection = firebaseFirestore.collection('categories');
     await fetchProducts();
   }
+
+  // Products CRUD
 
   void addProduct() {
     try {
@@ -98,5 +107,58 @@ class HomeController extends GetxController {
     prodShortTagController.clear();
     // in cases of menus always call
     update();
+  }
+
+  // Categories CRUD
+
+  void addCategory() {
+    try {
+      DocumentReference doc = categoryCollection.doc();
+      ProductCategory productCategory = ProductCategory(
+        id: doc.id,
+        name: categoryNameController.text,
+      );
+
+      final productCategoryJson = productCategory.toJson();
+      doc.set(
+          productCategoryJson); // code to add to entry to firebase collection
+
+      Get.snackbar('Success', 'Category added successfully',
+          colorText: Colors.green);
+      categoryNameController.clear();
+    } catch (e) {
+      Get.snackbar('Error', e.toString(), colorText: Colors.red);
+    } finally {
+      update();
+    }
+  }
+
+  Future<void> fetchCategories() async {
+    try {
+      QuerySnapshot categorySnapshot = await categoryCollection.get();
+      final List<ProductCategory> retrievedCategories = categorySnapshot.docs
+          .map((doc) =>
+              ProductCategory.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+      // clearing the local list to avoid multiple entries
+      productCategories.clear();
+      productCategories.assignAll(retrievedCategories);
+    } catch (e) {
+      Get.snackbar('Error', e.toString(), colorText: Colors.red);
+      print(e.toString());
+    } finally {
+      // super important - always call update() in such cases of statelessness
+      update();
+    }
+  }
+
+  void deleteCategory(String id) async {
+    try {
+      categoryCollection.doc(id).delete();
+      await fetchCategories();
+    } catch (e) {
+      Get.snackbar('Error', e.toString(), colorText: Colors.red);
+      print(e.toString());
+    }
   }
 }
