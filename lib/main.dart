@@ -5,6 +5,7 @@ import 'package:kriminal_fashion_ecommerce/firebase_options.dart';
 import 'package:kriminal_fashion_ecommerce/themes/theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'controller/home_controller.dart';
 import 'screens/home_screen.dart';
 import 'themes/dark_mode.dart';
 import 'themes/light_mode.dart';
@@ -15,6 +16,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   Get.put(prefs);
+  Get.put(HomeController());
 
   runApp(const MyApp());
 }

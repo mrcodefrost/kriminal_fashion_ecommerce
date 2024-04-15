@@ -36,8 +36,6 @@ class AddCategoryScreen extends StatelessWidget {
                   ),
                   onPressed: () async {
                     homeController.addCategory();
-                    await Future.delayed(const Duration(milliseconds: 2000));
-                    Get.until((route) => Get.currentRoute == '/');
                   },
                   child: const Text('Add Category')),
             ],

@@ -89,8 +89,6 @@ class AddProductScreen extends StatelessWidget {
                         'Swimwear',
                         'Boots',
                         'Shoe',
-                        'Beach Shoes',
-                        'High heels',
                       ],
                       onSelected: (selectedValue) {
                         homeController.prodCategory =
@@ -151,9 +149,9 @@ class AddProductScreen extends StatelessWidget {
                   ),
                   onPressed: () async {
                     homeController.addProduct();
-                    await Future.delayed(const Duration(milliseconds: 2000));
+                    // await Future.delayed(const Duration(milliseconds: 2000));
                     // Get.back(); dont work
-                    Get.until((route) => Get.currentRoute == '/');
+                    // Get.until((route) => Get.currentRoute == '/');
                   },
                   child: const Text('Add Product')),
             ],

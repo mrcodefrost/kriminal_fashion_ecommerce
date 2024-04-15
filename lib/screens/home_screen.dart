@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/controller/home_controller.dart';
-import 'package:kriminal_fashion_ecommerce/screens/add_category_screen.dart';
+import 'package:kriminal_fashion_ecommerce/screens/categories_screen.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import '../themes/theme_controller.dart';
@@ -10,9 +10,9 @@ import 'add_product_screen.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final HomeController homeController = Get.put(HomeController());
+  final homeController = Get.find<HomeController>();
 
-  Future<void> refresh() async {
+  Future<void> refreshProductList() async {
     await homeController.fetchProducts();
   }
 
@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  refresh();
+                  refreshProductList();
                 },
                 icon: const Icon(Icons.refresh))
           ],
@@ -67,15 +67,37 @@ class HomeScreen extends StatelessWidget {
                     // themeController.toggleTheme(); // does not work
                   },
                 ),
+                // ListTile(
+                //   title: const Text('Add Category'),
+                //   leading: Icon(
+                //     Icons.category,
+                //     color: context.theme.colorScheme.inversePrimary,
+                //   ),
+                //   onTap: () {
+                //     Navigator.pop(context);
+                //     Get.to(AddCategoryScreen());
+                //   },
+                // ),
                 ListTile(
-                  title: const Text('Add Category'),
+                  title: const Text('Products'),
+                  leading: Icon(
+                    Icons.shop,
+                    color: context.theme.colorScheme.inversePrimary,
+                  ),
+                  onTap: () {
+                    // Navigator.pop(context);
+                    Get.offAll(HomeScreen());
+                  },
+                ),
+                ListTile(
+                  title: const Text('Categories'),
                   leading: Icon(
                     Icons.category,
                     color: context.theme.colorScheme.inversePrimary,
                   ),
                   onTap: () {
                     Navigator.pop(context);
-                    Get.to(AddCategoryScreen());
+                    Get.to(CategoriesScreen());
                   },
                 ),
               ],
@@ -83,7 +105,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         body: LiquidPullToRefresh(
-          onRefresh: refresh,
+          onRefresh: refreshProductList,
           child: ListView.builder(
               itemCount: homeController.products.length,
               itemBuilder: (context, index) {
