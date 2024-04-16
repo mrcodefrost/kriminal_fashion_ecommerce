@@ -72,24 +72,10 @@ class AddProductScreen extends StatelessWidget {
                 children: [
                   Flexible(
                     child: CustomDropDownMenu(
-                      items: const [
-                        'General',
-                        'Dresses',
-                        'Skirts',
-                        'Tops',
-                        'Knitwear',
-                        'Polo Shirts',
-                        'T-Shirts',
-                        'Shirts',
-                        'Trousers',
-                        'Suits',
-                        'Jeans',
-                        'Cargo',
-                        'Shorts',
-                        'Swimwear',
-                        'Boots',
-                        'Shoe',
-                      ],
+                      // convert to List<String>, category can't be null
+                      items: homeController.productCategories
+                          .map((category) => category.name!)
+                          .toList(),
                       onSelected: (selectedValue) {
                         homeController.prodCategory =
                             selectedValue ?? homeController.prodCategory;
@@ -99,6 +85,7 @@ class AddProductScreen extends StatelessWidget {
                   ),
                   Flexible(
                     child: CustomDropDownMenu(
+                      // TODO make dynamic
                       items: const [
                         'Unbranded',
                         'Zara',

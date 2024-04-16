@@ -33,6 +33,7 @@ class HomeController extends GetxController {
     productCollection = firebaseFirestore.collection('products');
     categoryCollection = firebaseFirestore.collection('categories');
     await fetchProducts();
+    await fetchCategories();
   }
 
   // Products CRUD
