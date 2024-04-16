@@ -131,8 +131,8 @@ class AddProductScreen extends StatelessWidget {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: context.theme.colorScheme.primary,
-                    foregroundColor: context.theme.colorScheme.tertiary,
+                    backgroundColor: context.theme.colorScheme.secondary,
+                    foregroundColor: context.theme.colorScheme.inversePrimary,
                   ),
                   onPressed: () async {
                     homeController.addProduct();

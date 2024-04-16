@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomDropDownMenu extends StatelessWidget {
   final List<String> items;
@@ -23,15 +24,15 @@ class CustomDropDownMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
-      inputDecorationTheme: const InputDecorationTheme(
+      inputDecorationTheme: InputDecorationTheme(
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.orange,
+            color: context.theme.colorScheme.primary,
           ),
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.green,
+            color: context.theme.colorScheme.primary,
           ),
         ),
       ),
