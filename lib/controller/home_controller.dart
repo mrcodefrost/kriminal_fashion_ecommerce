@@ -27,6 +27,9 @@ class HomeController extends GetxController {
   List<Product> products = [];
   List<ProductCategory> productCategories = [];
 
+  // TODO make product brand
+  // List<ProductBrand> productBands = [];
+
   @override
   void onInit() async {
     super.onInit();
