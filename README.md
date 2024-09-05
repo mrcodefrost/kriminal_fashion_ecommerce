@@ -4,6 +4,20 @@
 
 Kriminal Business App is the administrative panel for managing products and orders for the Kriminal fashion brand. This app allows the business to add, update, and remove products, manage orders, and control the inventory.
 
+<div style="
+  display: flex;
+  justify-content: space-between;
+  ">
+  <img src = "https://github.com/mrcodefrost/kriminal_fashion_ecommerce/blob/main/repo%20resources/1.png?raw=true" width="770"/>
+  <img src = "https://github.com/mrcodefrost/kriminal_fashion_ecommerce/blob/main/repo%20resources/2.jpg?raw=true" width="250"/>
+  <img src = "https://github.com/mrcodefrost/kriminal_fashion_ecommerce/blob/main/repo%20resources/3.jpg?raw=true" width="250"/>
+  <img src = "https://github.com/mrcodefrost/kriminal_fashion_ecommerce/blob/main/repo%20resources/4.jpg?raw=true" width="250"/>
+  <img src = "https://github.com/mrcodefrost/kriminal_fashion_ecommerce/blob/main/repo%20resources/5.jpg?raw=true" width="250"/>
+  <img src = "https://github.com/mrcodefrost/kriminal_fashion_ecommerce/blob/main/repo%20resources/6.jpg?raw=true" width="250"/>
+  <img src = "https://github.com/mrcodefrost/kriminal_fashion_ecommerce/blob/main/repo%20resources/7.jpg?raw=true" width="250"/>
+  
+</div>
+
 ### Features
 
 - **Product Management:** Add, update, and remove products from the Kriminal catalog.
