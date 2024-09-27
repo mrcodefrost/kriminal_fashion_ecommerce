@@ -19,12 +19,10 @@ class AddCategoryScreen extends StatelessWidget {
           width: double.maxFinite,
           child: Column(
             children: [
-              const Text('Add new category'),
               TextField(
                 controller: homeController.categoryNameController,
-                decoration: const InputDecoration(
-                    label: Text('Category Name'),
-                    hintText: 'Enter your product category here'),
+                decoration:
+                    const InputDecoration(label: Text('Category Name'), hintText: 'Enter your product category here'),
               ),
               const SizedBox(
                 height: 10,

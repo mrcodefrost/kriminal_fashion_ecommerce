@@ -1,34 +1,12 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'product.g.dart';
-
-@JsonSerializable()
 class Product {
-  @JsonKey(name: "id")
   String? id;
-
-  @JsonKey(name: "name")
   String? name;
-
-  @JsonKey(name: "description")
   String? description;
-
-  @JsonKey(name: "category")
   String? category;
-
-  @JsonKey(name: "image")
   String? image;
-
-  @JsonKey(name: "price")
   double? price;
-
-  @JsonKey(name: "brand")
   String? brand;
-
-  @JsonKey(name: "offer")
   bool? offer;
-
-  @JsonKey(name: 'shortTag')
   String? shortTag;
 
   Product({
@@ -43,7 +21,28 @@ class Product {
     this.shortTag,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
-  Map<String, dynamic> toJson() => _$ProductToJson(this);
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        category: json['category'],
+        image: json['image'],
+        offer: json['offer'],
+        // firebase stores field as number, To avoid issues handle conversion for int to double like below
+        price: (json['price'] is int) ? (json['price'] as int).toDouble() : json['price'],
+        brand: json['brand'],
+        shortTag: json['shortTag'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'description': description,
+        'category': category,
+        'image': image,
+        'offer': offer,
+        'price': price,
+        'brand': brand,
+        'shortTag': shortTag,
+      };
 }

@@ -4,41 +4,28 @@ import 'package:get/get.dart';
 class CustomDropDownMenu extends StatelessWidget {
   final List<String> items;
   final String hintText;
-  final void Function(String?)? onSelected;
+  final void Function(String?) onChanged;
+  final String? Function(String?)? validator;
 
-  List<DropdownMenuEntry<String>> buildDropdownMenuItems() {
-    return items.map((String item) {
-      return DropdownMenuEntry<String>(
+  List<DropdownMenuItem<String>> buildDropdownMenuItems() {
+    return items.map((item) {
+      return DropdownMenuItem<String>(
         value: item,
-        label: item,
+        child: Text(item),
       );
     }).toList();
   }
 
   const CustomDropDownMenu(
-      {super.key,
-      required this.items,
-      this.onSelected,
-      required this.hintText});
+      {super.key, required this.items, required this.onChanged, required this.hintText, this.validator});
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu(
-      inputDecorationTheme: InputDecorationTheme(
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: context.theme.colorScheme.primary,
-          ),
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: context.theme.colorScheme.primary,
-          ),
-        ),
-      ),
-      dropdownMenuEntries: buildDropdownMenuItems(),
-      onSelected: onSelected,
-      hintText: hintText,
+    return DropdownButtonFormField(
+      onChanged: onChanged,
+      hint: Text(hintText),
+      items: buildDropdownMenuItems(),
+      validator: validator,
     );
   }
 }

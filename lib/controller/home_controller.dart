@@ -19,7 +19,7 @@ class HomeController extends GetxController {
   // Category Controller
   TextEditingController categoryNameController = TextEditingController();
 
-  String prodCategory = 'General';
+  String prodCategory = '';
   String prodBrand = 'Unbranded';
   bool prodOffer = false;
   String prodShortTag = 'No Tag';
@@ -60,8 +60,7 @@ class HomeController extends GetxController {
       final productJson = product.toJson();
       doc.set(productJson); // code to add to entry to firebase collection
 
-      Get.snackbar('Success', 'Product added successfully',
-          colorText: Colors.green);
+      Get.snackbar('Success', 'Product added successfully', colorText: Colors.green);
       resetFieldsToDefault();
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
@@ -73,14 +72,12 @@ class HomeController extends GetxController {
   Future<void> fetchProducts() async {
     try {
       QuerySnapshot productSnapshot = await productCollection.get();
-      final List<Product> retrievedProducts = productSnapshot.docs
-          .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
-          .toList();
+      final List<Product> retrievedProducts =
+          productSnapshot.docs.map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>)).toList();
       // clearing the local list to avoid multiple entries
       products.clear();
       products.assignAll(retrievedProducts);
-      Get.snackbar('Success', 'Product list updated successfully',
-          colorText: Colors.green);
+      Get.snackbar('Success', 'Product list updated successfully', colorText: Colors.green);
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
       print(e.toString());
@@ -105,8 +102,8 @@ class HomeController extends GetxController {
     prodPriceController.clear();
     prodDescriptionController.clear();
     prodImageController.clear();
-    prodCategory = 'General';
-    prodBrand = 'Unbranded';
+    prodCategory = '';
+    prodBrand = '';
     prodOffer = false;
     prodShortTagController.clear();
     // in cases of menus always call
@@ -124,11 +121,9 @@ class HomeController extends GetxController {
       );
 
       final productCategoryJson = productCategory.toJson();
-      doc.set(
-          productCategoryJson); // code to add to entry to firebase collection
+      doc.set(productCategoryJson); // code to add to entry to firebase collection
 
-      Get.snackbar('Success', 'Category added successfully',
-          colorText: Colors.green);
+      Get.snackbar('Success', 'Category added successfully', colorText: Colors.green);
       categoryNameController.clear();
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
@@ -140,10 +135,8 @@ class HomeController extends GetxController {
   Future<void> fetchCategories() async {
     try {
       QuerySnapshot categorySnapshot = await categoryCollection.get();
-      final List<ProductCategory> retrievedCategories = categorySnapshot.docs
-          .map((doc) =>
-              ProductCategory.fromJson(doc.data() as Map<String, dynamic>))
-          .toList();
+      final List<ProductCategory> retrievedCategories =
+          categorySnapshot.docs.map((doc) => ProductCategory.fromJson(doc.data() as Map<String, dynamic>)).toList();
       // clearing the local list to avoid multiple entries
       productCategories.clear();
       productCategories.assignAll(retrievedCategories);
