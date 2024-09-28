@@ -1,18 +1,29 @@
+import 'package:kriminal_fashion_ecommerce/model/super_category.dart';
+
 class ProductCategory {
-  String? id;
-  String? name;
+  String id;
+  String name;
+  SuperCategory superCategoryName;
 
   ProductCategory({
-    this.id,
-    this.name,
+    required this.id,
+    required this.name,
+    required this.superCategoryName,
   });
 
-  factory ProductCategory.fromJson(Map<String, dynamic> json) => ProductCategory(
-        id: json['id'] as String?,
-        name: json['name'] as String?,
-      );
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-      };
+  factory ProductCategory.fromJson(Map<String, dynamic> json) {
+    return ProductCategory(
+      id: json['id'],
+      name: json['name'],
+      superCategoryName: json['superCategoryName'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['superCategoryName'] = superCategoryName;
+    return data;
+  }
 }

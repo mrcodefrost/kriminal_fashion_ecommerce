@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
-
   final String text;
-  const PrimaryButton({super.key, required this.text});
-
+  final VoidCallback? onPressed;
+  const PrimaryButton({super.key, required this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +20,12 @@ class PrimaryButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           text,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
         ),
       ),
     );

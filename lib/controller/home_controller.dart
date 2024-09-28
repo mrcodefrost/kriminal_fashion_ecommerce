@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/model/product.dart';
 import 'package:kriminal_fashion_ecommerce/model/product_category.dart';
+import 'package:kriminal_fashion_ecommerce/model/super_category.dart';
 
 class HomeController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -19,13 +20,14 @@ class HomeController extends GetxController {
   // Category Controller
   TextEditingController categoryNameController = TextEditingController();
 
-  String prodCategory = '';
-  String prodBrand = 'Unbranded';
-  bool prodOffer = false;
-  String prodShortTag = 'No Tag';
+  RxString prodCategory = ''.obs;
+  RxString prodBrand = 'Unbranded'.obs;
+  RxBool prodOffer = false.obs;
+  RxString prodShortTag = 'No Tag'.obs;
+  RxString selectedSuperCategory = ''.obs;
 
-  List<Product> products = [];
-  List<ProductCategory> productCategories = [];
+  RxList<Product> products = <Product>[].obs;
+  RxList<ProductCategory> productCategories = <ProductCategory>[].obs;
 
   // TODO make product brand
   // List<ProductBrand> productBands = [];
@@ -47,11 +49,11 @@ class HomeController extends GetxController {
       Product product = Product(
         id: doc.id,
         name: prodNameController.text,
-        category: prodCategory,
+        category: prodCategory.value,
         description: prodDescriptionController.text,
         price: double.tryParse(prodPriceController.text) ?? 0.0,
         // price: productPriceController.text as double,
-        brand: prodBrand,
+        brand: prodBrand.value,
         image: prodImageController.text,
         offer: true,
         shortTag: prodShortTagController.text,
@@ -102,9 +104,9 @@ class HomeController extends GetxController {
     prodPriceController.clear();
     prodDescriptionController.clear();
     prodImageController.clear();
-    prodCategory = '';
-    prodBrand = '';
-    prodOffer = false;
+    prodCategory.value = '';
+    prodBrand.value = '';
+    prodOffer.value = false;
     prodShortTagController.clear();
     // in cases of menus always call
     update();
@@ -118,6 +120,7 @@ class HomeController extends GetxController {
       ProductCategory productCategory = ProductCategory(
         id: doc.id,
         name: categoryNameController.text,
+        superCategoryName: SuperCategory.man,
       );
 
       final productCategoryJson = productCategory.toJson();
