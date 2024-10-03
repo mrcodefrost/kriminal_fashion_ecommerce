@@ -1,8 +1,19 @@
-import 'package:kriminal_fashion_ecommerce/model/super_category.dart';
+import 'package:kriminal_fashion_ecommerce/feature/category/data/models/super_category.dart';
+
+// class SuperCategory {
+//   String id;
+//   String name;
+//
+//   SuperCategory({
+//     required this.id,
+//     required this.name,
+//   });
+// }
 
 class ProductCategory {
   String id;
   String name;
+  // Todo : use super category as string only
   SuperCategory superCategoryName;
 
   ProductCategory({

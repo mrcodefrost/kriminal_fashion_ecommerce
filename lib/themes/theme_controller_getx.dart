@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/themes/dark_mode.dart';
 import 'package:kriminal_fashion_ecommerce/themes/light_mode.dart';
 
+import '../utils/utils.dart';
+
 // ENTIRELY USELESS(WRONG) APPROACH
 
 class ThemeControllerGetx extends GetxController {
@@ -25,7 +27,7 @@ class ThemeControllerGetx extends GetxController {
       themeData.value = lightMode;
     }
 
-    print('TOGGLE THEME CALLED');
+    logg.d('Toggle theme: ${themeData.value}');
     // put this in MyApp before @override
     // final ThemeController _themeController = Get.put(ThemeController());
     // in individual screens

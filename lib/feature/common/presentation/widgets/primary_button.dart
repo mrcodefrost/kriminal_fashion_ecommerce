@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class PrimaryButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
-  const PrimaryButton({super.key, required this.text, this.onPressed});
+  final bool? capitalise;
+  const PrimaryButton({super.key, required this.text, this.onPressed, this.capitalise = true});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          text,
+          capitalise == true ? text.toUpperCase() : text,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w600,
               ),

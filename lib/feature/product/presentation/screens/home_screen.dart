@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/controller/home_controller.dart';
-import 'package:kriminal_fashion_ecommerce/screens/categories_screen.dart';
+import 'package:kriminal_fashion_ecommerce/feature/category/presentation/screens/categories_screen.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import '../themes/theme_controller.dart';
 import 'add_product_screen.dart';
+import '../../../../themes/theme_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -111,12 +111,10 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(homeController.products[index].name ?? ''),
-                  subtitle: Text(
-                      (homeController.products[index].price ?? 0).toString()),
+                  subtitle: Text((homeController.products[index].price ?? 0).toString()),
                   trailing: IconButton(
                       onPressed: () {
-                        homeController.deleteProduct(
-                            homeController.products[index].id ?? '');
+                        homeController.deleteProduct(homeController.products[index].id ?? '');
                       },
                       icon: const Icon(Icons.delete)),
                 );

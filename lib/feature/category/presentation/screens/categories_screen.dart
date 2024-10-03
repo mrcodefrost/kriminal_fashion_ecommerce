@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kriminal_fashion_ecommerce/screens/add_category_screen.dart';
-import 'package:kriminal_fashion_ecommerce/screens/home_screen.dart';
+import 'package:kriminal_fashion_ecommerce/feature/category/presentation/screens/add_category_screen.dart';
+import 'package:kriminal_fashion_ecommerce/feature/product/presentation/screens/home_screen.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import '../controller/home_controller.dart';
+import '../../../../controller/home_controller.dart';
 
 class CategoriesScreen extends StatelessWidget {
   CategoriesScreen({super.key});
@@ -40,15 +40,11 @@ class CategoriesScreen extends StatelessWidget {
               itemCount: homeController.productCategories.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title:
-                      Text(homeController.productCategories[index].name ?? ''),
-                  subtitle: Text(
-                      (homeController.productCategories[index].id ?? 'Error')
-                          .toString()),
+                  title: Text(homeController.productCategories[index].name),
+                  subtitle: Text((homeController.productCategories[index].id).toString()),
                   trailing: IconButton(
                       onPressed: () {
-                        homeController.deleteCategory(
-                            homeController.productCategories[index].id ?? '');
+                        homeController.deleteCategory(homeController.productCategories[index].id);
                       },
                       icon: const Icon(Icons.delete)),
                 );

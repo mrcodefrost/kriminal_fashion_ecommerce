@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/controller/home_controller.dart';
-import 'package:kriminal_fashion_ecommerce/model/super_category.dart';
 import 'package:kriminal_fashion_ecommerce/utils/validations.dart';
-import 'package:kriminal_fashion_ecommerce/widgets/custom_drop_down_menu.dart';
-import 'package:kriminal_fashion_ecommerce/widgets/primary_button.dart';
+import 'package:kriminal_fashion_ecommerce/feature/common/presentation/widgets/custom_drop_down_menu.dart';
 
-import '../model/product_category.dart';
+import '../../../category/data/models/super_category.dart';
+import '../../../common/presentation/widgets/primary_button.dart';
+import '../../domain/usecase/add_product_usecases.dart';
 
 class AddProductScreen extends StatelessWidget {
   AddProductScreen({super.key});
@@ -109,24 +109,4 @@ class AddProductScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-// sort out and return a list of product categories that belong to a specific  super category
-List<ProductCategory> filterProductCategoryBySuperCategory(
-    SuperCategory superCategory, List<ProductCategory> allProductCategories) {
-  return allProductCategories.where((productCategory) => productCategory.superCategoryName == superCategory).toList();
-}
-
-// convert ProductCategory list to string list to get names only
-List<String> productCategoryListToStringList(List<ProductCategory> productCategories) {
-  return productCategories.map((productCategory) => productCategory.name).toList();
-}
-
-List<String> getFilteredProductListForDropdown(
-    List<ProductCategory> allProductCategories, String selectedSuperCategory) {
-  if (selectedSuperCategory.isNotEmpty) {
-    final superCategory = stringToSuperCategory(selectedSuperCategory);
-    return productCategoryListToStringList(filterProductCategoryBySuperCategory(superCategory, allProductCategories));
-  }
-  return [];
 }

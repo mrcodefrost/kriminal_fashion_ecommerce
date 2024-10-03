@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kriminal_fashion_ecommerce/model/product.dart';
-import 'package:kriminal_fashion_ecommerce/model/product_category.dart';
-import 'package:kriminal_fashion_ecommerce/model/super_category.dart';
+import 'package:kriminal_fashion_ecommerce/feature/product/data/models/product.dart';
+import 'package:kriminal_fashion_ecommerce/feature/category/data/models/product_category.dart';
+
+import '../feature/category/data/models/super_category.dart';
+import '../utils/utils.dart';
 
 class HomeController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -24,6 +26,7 @@ class HomeController extends GetxController {
   RxString prodBrand = 'Unbranded'.obs;
   RxBool prodOffer = false.obs;
   RxString prodShortTag = 'No Tag'.obs;
+  // array of objects CXX direct object
   RxString selectedSuperCategory = ''.obs;
 
   RxList<Product> products = <Product>[].obs;
@@ -82,7 +85,7 @@ class HomeController extends GetxController {
       Get.snackbar('Success', 'Product list updated successfully', colorText: Colors.green);
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
-      print(e.toString());
+      logg.e(e.toString(), error: 'fetchProducts() error');
     } finally {
       // super important - always call update() in such cases of statelessness
       update();
@@ -95,7 +98,7 @@ class HomeController extends GetxController {
       await fetchProducts();
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
-      print(e.toString());
+      logg.e(e.toString(), error: 'deleteProduct() error');
     }
   }
 
@@ -117,9 +120,17 @@ class HomeController extends GetxController {
   void addCategory() {
     try {
       DocumentReference doc = categoryCollection.doc();
+      logg.i(SuperCategory.man);
+      logg.i((SuperCategory.man).runtimeType);
       ProductCategory productCategory = ProductCategory(
         id: doc.id,
         name: categoryNameController.text,
+        // superCategoryName: {
+        //   {"": ""},
+        //   {"": ""},
+        //   {"": ""},
+        //   {"": ""},
+        // },
         superCategoryName: SuperCategory.man,
       );
 
@@ -130,6 +141,7 @@ class HomeController extends GetxController {
       categoryNameController.clear();
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
+      logg.e(e.toString(), error: 'addCategory() error');
     } finally {
       update();
     }
@@ -145,7 +157,7 @@ class HomeController extends GetxController {
       productCategories.assignAll(retrievedCategories);
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
-      print(e.toString());
+      logg.e(e.toString(), error: 'fetchCategories() error');
     } finally {
       // super important - always call update() in such cases of statelessness
       update();
@@ -158,7 +170,7 @@ class HomeController extends GetxController {
       await fetchCategories();
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
-      print(e.toString());
+      logg.e(e.toString(), error: 'deleteCategory() error');
     }
   }
 }
