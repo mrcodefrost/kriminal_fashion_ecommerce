@@ -8,10 +8,16 @@ import '../../../category/data/models/super_category.dart';
 import '../../../common/presentation/widgets/primary_button.dart';
 import '../../domain/usecase/add_product_usecases.dart';
 
-class AddProductScreen extends StatelessWidget {
-  AddProductScreen({super.key});
+class AddProductScreen extends StatefulWidget {
+  const AddProductScreen({super.key});
 
+  @override
+  State<AddProductScreen> createState() => _AddProductScreenState();
+}
+
+class _AddProductScreenState extends State<AddProductScreen> {
   final HomeController homeController = Get.find<HomeController>();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -64,7 +70,7 @@ class AddProductScreen extends StatelessWidget {
                     validator: Validations.isEmptyValidator,
                   ),
                   const SizedBox(height: 10),
-                  // Todo : on selecting category, only product category under this categories can be selected in the product dropdown
+                  // On selecting category, only product category under this category can be selected in the product dropdown
                   CustomDropDownMenu(
                     items: superCategoriesList,
                     hintText: 'Category',
@@ -74,8 +80,8 @@ class AddProductScreen extends StatelessWidget {
                     validator: Validations.isEmptyDropDownValidator,
                   ),
                   const SizedBox(height: 10),
+                  // Only show filtered products based on selected super category
                   CustomDropDownMenu(
-                    // items: homeController.productCategories.map((category) => category.name! == homeController.selectedSuperCategory).toList(),
                     items: getFilteredProductListForDropdown(
                         homeController.productCategories, homeController.selectedSuperCategory.value),
                     hintText: 'Product Category',
@@ -84,15 +90,6 @@ class AddProductScreen extends StatelessWidget {
                     },
                     validator: Validations.isEmptyDropDownValidator,
                   ),
-                  // const SizedBox(height: 10),
-                  // CustomDropDownMenu(
-                  //   items: const ['true', 'false'],
-                  //   onChanged: (selectedValue) {
-                  //     homeController.prodOffer = bool.tryParse(selectedValue ?? 'false') ?? homeController.prodOffer;
-                  //   },
-                  //   hintText: 'Offer',
-                  //   validator: Validations.isEmptyDropDownValidator,
-                  // ),
                   const SizedBox(height: 10),
                   PrimaryButton(
                       text: 'ADD PRODUCT',

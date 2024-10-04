@@ -1,36 +1,33 @@
 class Product {
-  String? id;
-  String? name;
-  String? description;
-  String? category;
-  String? image;
-  double? price;
-  String? brand;
-  bool? offer;
-  String? shortTag;
+  String id;
+  String name;
+  String description;
+  String superCategory;
+  String category;
+  String image;
+  double price;
+  String shortTag;
 
   Product({
-    this.id,
-    this.name,
-    this.description,
-    this.category,
-    this.image,
-    this.offer,
-    this.price,
-    this.brand,
-    this.shortTag,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.superCategory,
+    required this.category,
+    required this.image,
+    required this.price,
+    required this.shortTag,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json['id'],
         name: json['name'],
         description: json['description'],
+        superCategory: json['superCategory'],
         category: json['category'],
         image: json['image'],
-        offer: json['offer'],
         // firebase stores field as number, To avoid issues handle conversion for int to double like below
         price: (json['price'] is int) ? (json['price'] as int).toDouble() : json['price'],
-        brand: json['brand'],
         shortTag: json['shortTag'],
       );
 
@@ -38,11 +35,10 @@ class Product {
         'id': id,
         'name': name,
         'description': description,
+        'superCategory': superCategory,
         'category': category,
         'image': image,
-        'offer': offer,
         'price': price,
-        'brand': brand,
         'shortTag': shortTag,
       };
 }

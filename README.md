@@ -68,7 +68,7 @@ Kriminal Business App is the administrative panel for managing products and orde
 If you haven't already, [sign in to your Firebase account](https://firebase.google.com/docs/web/setup).
 Install Firebase CLI globally using IDE Terminal:
  ```bash
-   flutter pub get
+   npm install -g firebase-tools
  ```
 Log in to Firebase
  ```bash

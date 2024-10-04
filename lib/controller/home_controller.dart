@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:kriminal_fashion_ecommerce/feature/product/data/models/product.dart';
 import 'package:kriminal_fashion_ecommerce/feature/category/data/models/product_category.dart';
 
-import '../feature/category/data/models/super_category.dart';
 import '../utils/utils.dart';
 
 class HomeController extends GetxController {
@@ -26,14 +25,10 @@ class HomeController extends GetxController {
   RxString prodBrand = 'Unbranded'.obs;
   RxBool prodOffer = false.obs;
   RxString prodShortTag = 'No Tag'.obs;
-  // array of objects CXX direct object
   RxString selectedSuperCategory = ''.obs;
 
   RxList<Product> products = <Product>[].obs;
   RxList<ProductCategory> productCategories = <ProductCategory>[].obs;
-
-  // TODO make product brand
-  // List<ProductBrand> productBands = [];
 
   @override
   void onInit() async {
@@ -52,13 +47,11 @@ class HomeController extends GetxController {
       Product product = Product(
         id: doc.id,
         name: prodNameController.text,
+        superCategory: selectedSuperCategory.value,
         category: prodCategory.value,
         description: prodDescriptionController.text,
         price: double.tryParse(prodPriceController.text) ?? 0.0,
-        // price: productPriceController.text as double,
-        brand: prodBrand.value,
         image: prodImageController.text,
-        offer: true,
         shortTag: prodShortTagController.text,
       );
 
@@ -92,6 +85,42 @@ class HomeController extends GetxController {
     }
   }
 
+  void updateProduct(String productId) async {
+    try {
+      // Get a reference to the existing document by using its ID
+      DocumentReference docRef = productCollection.doc(productId);
+
+      // Create a Product object with the updated values
+      Product updatedProduct = Product(
+        id: productId,
+        name: prodNameController.text, // Update name from controller
+        superCategory: selectedSuperCategory.value, // Updated super category
+        category: prodCategory.value, // Updated category
+        description: prodDescriptionController.text, // Updated description
+        price: double.tryParse(prodPriceController.text) ?? 0.0, // Updated price
+        image: prodImageController.text, // Updated image URL
+        shortTag: prodShortTagController.text, // Updated short tag
+      );
+
+      // Convert the Product object to a JSON format
+      final productJson = updatedProduct.toJson();
+
+      // Update the document in Firestore
+      await docRef.update(productJson);
+
+      // Show a success message
+      Get.snackbar('Success', 'Product updated successfully', colorText: Colors.green);
+      resetFieldsToDefault();
+    } catch (e) {
+      // Show an error message if something goes wrong
+      Get.snackbar('Error', 'Failed to update product: ${e.toString()}', colorText: Colors.red);
+      logg.e(e.toString(), error: 'updateProduct() error');
+    } finally {
+      // Update the UI if necessary
+      update();
+    }
+  }
+
   void deleteProduct(String id) async {
     try {
       productCollection.doc(id).delete();
@@ -120,18 +149,10 @@ class HomeController extends GetxController {
   void addCategory() {
     try {
       DocumentReference doc = categoryCollection.doc();
-      logg.i(SuperCategory.man);
-      logg.i((SuperCategory.man).runtimeType);
       ProductCategory productCategory = ProductCategory(
         id: doc.id,
         name: categoryNameController.text,
-        // superCategoryName: {
-        //   {"": ""},
-        //   {"": ""},
-        //   {"": ""},
-        //   {"": ""},
-        // },
-        superCategoryName: SuperCategory.man,
+        superCategory: selectedSuperCategory.value,
       );
 
       final productCategoryJson = productCategory.toJson();

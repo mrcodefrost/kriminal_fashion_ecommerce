@@ -40,7 +40,8 @@ class CategoriesScreen extends StatelessWidget {
               itemCount: homeController.productCategories.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(homeController.productCategories[index].name),
+                  title: Text(
+                      '${homeController.productCategories[index].superCategory} | ${homeController.productCategories[index].name} '),
                   subtitle: Text((homeController.productCategories[index].id).toString()),
                   trailing: IconButton(
                       onPressed: () {
