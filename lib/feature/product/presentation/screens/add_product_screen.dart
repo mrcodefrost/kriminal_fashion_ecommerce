@@ -6,7 +6,7 @@ import 'package:kriminal_fashion_ecommerce/feature/common/presentation/widgets/c
 
 import '../../../category/data/models/super_category.dart';
 import '../../../common/presentation/widgets/primary_button.dart';
-import '../../domain/usecase/add_product_usecases.dart';
+import '../../domain/usecase/product_usecases.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
