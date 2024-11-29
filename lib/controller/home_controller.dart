@@ -22,7 +22,7 @@ class HomeController extends GetxController {
   TextEditingController categoryNameController = TextEditingController();
 
   RxString prodCategory = ''.obs;
-  RxString prodBrand = 'Unbranded'.obs;
+
   RxBool prodOffer = false.obs;
   RxString prodShortTag = 'No Tag'.obs;
   RxString selectedSuperCategory = ''.obs;
@@ -137,7 +137,6 @@ class HomeController extends GetxController {
     prodDescriptionController.clear();
     prodImageController.clear();
     prodCategory.value = '';
-    prodBrand.value = '';
     prodOffer.value = false;
     prodShortTagController.clear();
     // in cases of menus always call

@@ -11,14 +11,16 @@ import 'themes/dark_mode.dart';
 import 'themes/light_mode.dart';
 
 void main() async {
+  runApp(const MyApp());
+}
+
+Future<void> _setup() async {
   WidgetsFlutterBinding.ensureInitialized();
   // always place Firebase.initializeApp first after ensureInitialized
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   Get.put(prefs);
   Get.put(HomeController());
-
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

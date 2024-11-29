@@ -1,4 +1,3 @@
-import '../../../../utils/utils.dart';
 import '../../../category/data/models/product_category.dart';
 
 // sort out and return a list of product categories that belong to a specific  super category
